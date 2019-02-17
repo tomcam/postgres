@@ -9,11 +9,11 @@ You can do some of them through a visual user interface, but that's not covered 
 Knowing how to perform these operations on the command line means you can script them,
 and scripting means you can automate tests, error checking, and so on. 
 
-This section isn't a full cheat sheet for psql.
+This section isn't a full cheat sheet for `psql`.
 It covers the most common operations and shows them roughly in sequence, 
 as you'd use them in a typical work session.
 
-Starting and quitting the psql command-line client |
+Starting and quitting the psql interactive terminal |
 ----- |
 [Command-line prompts for psql](#psql_prompts) |
 [Opening a connection to a remote SQL instance](#open_remote_connection) |
@@ -49,7 +49,7 @@ Diagnostic commands |
 
 Before using this section, you'll need:
 
-* The user name and password for your PostgeSQL database
+* The user name and password for your PostgreSQL database
 * The [IP address of your remote instance](configuration.md#determining_ip_address)
 * Possibly, [your own IP address](configuration.md#determining_your_ip_address) if you have difficulty connecting.
 
@@ -58,8 +58,7 @@ Before using this section, you'll need:
 
 The `$` starting a command line in the examples below represents your operating system prompt. 
 Prompts are configurable so it may well not look like this. 
-On Windows it might look like `C:\postgres\mysite>` but Windows prompts are also configurable.
-
+On Windows it might look like `C:\Program Files\PostgreSQL>` but Windows prompts are also configurable.
 
 ````
 $ psql -U sampleuser -h localhost
@@ -69,53 +68,75 @@ A line starting with `#` represents a comment. Same for everything to the right 
 If you accidentally type it or copy and paste it in, don't worry. Nothing will happen.
 
 ````
+This worked to connect to Postgres on DigitalOcean
+# -U is the username (it will appear in the \l command)
+# -h is the name of the machine where the server is running.
+# -p is the port where the database listens to connections. Default is 5432.
+# -d is the name of the database to connect to. I think DO generated this for me, or maybe PostgreSQL.
+# Password when asked is csizllepewdypieiib
+$ psql -U doadmin -h production-sfo-test1-do-user-4866002-0.db.ondigitalocean.com -p 25060 -d mydb
+
 # Open a database in a remote location.
-$ psql -U sampleuser -h esnipe-sfo-test1-do-user-4824002-0.db.ondigitalocean.com -p 21334
+$ psql -U sampleuser -h production-sfo-test1-do-user-4866002-0.db.ondigitalocean.com -p 21334
 ````
-## The psql command line utility
+## Using psql
 
-You'll use the [mysql command-line tool](https://dev.mysql.com/doc/refman/5.7/en/mysql.html) most of all because it's used to create databases and tables, show information about tables, and even to enter information (records) into the database.
+You'll use `psql` (aka the [PostgreSQL interactive terminal](https://www.postgresql.org/docs/current/app-psql.html) most of all because it's used to create databases and tables, show information about tables, and even to enter information (records) into the database.
 
-<a name="open_remote_connection"></a>
+### Opening a connection locally
+
+A common case during development is 
+````
+# Log into Postgres as the user named postgres
+$ psql -U postgres
+````
+
 ### Opening a connection remotely
 
-To connect your remote Cloud SQL instance with your local MySQL installation, start `mysql` at your operating system command line.
-
-In the example below, replace:
-
-* `123.456.789.000` with the IP address of your Cloud SQL instance
-* `sampleuser` with your Cloud SQL user name
-
+To connect your remote PostgreSQL instance from your local machine, use `psql` at your operating system command line.
+Here's a typical connection.
 
 ````
-$ mysql -u sampleuser -h 123.456.789.000 -p
-Enter password:
+# -U is the username (it will appear in the \l command)
+# -h is the name of the machine where the server is running.
+# -p is the port where the database listens to connections. Default is 5432.
+# -d is the name of the database to connect to. I think DO generated this for me, or maybe PostgreSQL.
+$ psql -U doadmin -h production-sfo-test1-do-user-4866002-0.db.ondigitalocean.com -p 25060 -d defaultdb
 ````
 
 Here you'd enter the password. In case someone is peering over your shoulder, the characters are hidden. After you've entered your information properly you'll get this message (truncated for clarity):
 
-````
-Welcome to the MySQL monitor. Commands end with ; or \g.
-Your MySQL connection id is 359
-
-Oracle is a registered trademark blah blah blah
-
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
-mysql>
-````
-<a name="quit_mysql_cli"></a>
-### Quitting the mysql command line utility
-
-Before we learn anything else, here's how to quite the `mysql` CLI and return to the operating system prompt:
+### Looking at the psql prompt
+A few things appear, then the `psql` prompt is displayed.
+The name of the current database appears before the prmopt.
 
 ````
-mysql> quit;
+psql (11.1, server 11.0)
+Type "help" for help.
+
+
+postgres=# 
 ````
 
-#### Warning: Don't forget to end commands with a semicolon!
+At this point you're expected to type commands and parameters into the command line.
 
-One gotcha is that almost all commands you enter into the `mysql` CLI must end in a semicolon. For example:
+### Quitting pqsql
+
+Before we learn anything else, here's how to quit `psql` and return to the operating system prompt.
+You type backslash, the letter `q`, and then you press the Enter or return key.
+
+````
+# Press enter after typing \q
+postgres=# \q
+````
+
+This takes you back out to the operating system prompt.
+
+### psql vs SQL commands
+
+#### Warning: SQL commands end with a semicolon!
+
+One gotcha is that almost all SQL commands you enter into `psql` must end in a semicolon. For example:
 
 ````
 # List all tables in this database
@@ -459,7 +480,7 @@ mysql> SHOW VARIABLES WHERE Variable_name = 'hostname';
 ### Getting the name of the current user (SELECT USER())
 
 ````
-mysql> select user();
+[postgres=> select user();
 
 +---------------+
 | user() |
@@ -470,11 +491,15 @@ mysql> select user();
 
 ````
 
+# Reference
+
+* PostgreSQL offical docs: [Server Administration](https://www.postgresql.org/docs/current/admin.html)
+* `psql` (the [PostgreSQL interactive terminal](https://www.postgresql.org/docs/current/app-psql.html) 
 <!---
 Boilerplate
 
 ````
-mysql> ;
+[postgres=> 
 
 ````
 -->
