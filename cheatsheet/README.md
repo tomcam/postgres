@@ -146,59 +146,49 @@ create and modify PostgreSQL databases.
 One gotcha is that almost all SQL commands you enter into `psql` must end in a semicolon. For example:
 
 ````
-postgres=# CREATE TABLE IF NOT EXISTS account(
- id serial PRIMARY KEY,
- username VARCHAR (50) UNIQUE NOT NULL,
- email VARCHAR (355) UNIQUE NOT NULL,
- created_on TIMESTAMP NOT NULL,
- last_login TIMESTAMP
-);
-
+postgres=# DROP TABLE "sample_property";
 ````
 
-It's easy to forget. If you do, you'll see this perplexing prompt:
+It's easy to forget. If you do forget the semicolon, you'll see this perplexing prompt:
 
 ````
-mysql> show tables
-->
+[postgres=# DROP TABLE "sample_property"
+postgres=#
+
 ````
 
 When you do, just remember to finish it off with that semicolon:
 
 ````
-mysql> show tables
--> `;` # All right, I get the message!
-
+[postgres=# DROP TABLE "sample_property"
+postgres=# ;
 ````
 
-#### We cheated a little
 
-Remember how we said most of the commands require a semicolon? That's actually only SQL statements. There are other meta-commands like help, quit and so forth that don't need the semicolon. Here are a few examples. We lied a bit to start you with good habits right away.
+## Getting information about databases
 
-````
-# help shows you a list of mysql commands.
-mysql> help
+### \h Help
 
-# Quit without the semicolon
-mysql> quit
-````
-
-<a name="mysql_cli_shortcuts"></a>
-#### Also, shortcut commands:
-
-Some of these commands are abbreviated to a backslash character (or `\` followed by a single letter and the Enter key:
 ````
 # Get help. Note it's a backslash, not a forward slash.
-mysql> \h
-
-# Status shows name of current database, user, etc.
-mysql> \s
-
-# Even shorter way to quit.
-mysql> \q
+postgres=# \h
+````
+You'll get a long list of commands, then output is paused:
 
 ````
-## Getting information about databases
+Available help:
+  ABORT                            CREATE USER
+  ...
+  ALTER AGGREGATE                  CREATE USER MAPPING
+  ALTER PROCEDURE                  DROP INDEX
+:
+````
+
+* Press space to continue, or q to stop the output.
+
+### \l List databases
+
+````
 
 <a name="show_databases"></a>
 ### List databases (SHOW DATABASES)
@@ -208,7 +198,7 @@ What most people think of as a database (say, a list of customers) is actually a
 To get a list of all databases,
 
 ````
-mysql> show databases;
+postgres=# show databases;
 +--------------------+
 | Database |
 +--------------------+
@@ -226,9 +216,9 @@ mysql> show databases;
 Before you add tables, you need to create a database to contain those tables:
 
 ````
-mysql> CREATE DATABASE IF NOT EXISTS TODO;
+postgres=# CREATE DATABASE IF NOT EXISTS TODO;
 # Or if you're feeling brave:
-mysql> CREATE DATABASE TODO;
+postgres=# CREATE DATABASE TODO;
 ````
 
 The result should look like this:
@@ -243,7 +233,7 @@ Query OK, 1 row affected (0.07 sec)
 The `use` command lets you select a database:
 
 ````
-mysql> use sampledatabase;
+postgres=# use sampledatabase;
 ````
 
 Mysteriously, you are then informed:
@@ -258,7 +248,7 @@ This doesn't mean the contents or state of the database have changed. It means t
 ### Getting a list of tables contained in this database (SHOW TABLES)
 
 ```sql
-mysql> show tables;
+postgres=# show tables;
 ```
 
 In this example there are two tables in the database, `sample1` and `todo`.
@@ -282,7 +272,7 @@ What are the fields (columns) in a table? Find out with `show columns from` foll
 Here's an example for the `todo` table, followed by its output.
 
 ````
-mysql> show columns from todo;
+postgres=# show columns from todo;
 +-------------+--------------+------+-----+---------+-------+
 | Field | Type | Null | Key | Default | Extra |
 +-------------+--------------+------+-----+---------+-------+
@@ -303,7 +293,7 @@ Before you create any tables, you must create a [database](#create-database) to 
 This polite form creates a table only if one by that name is not already present. If you're feeling brave you can omit the `IF NOT EXISTS`
 
 ````
-mysql> create table if not exists `product` (id MEDIUMINT NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` VARCHAR(100) NOT NULL DEFAULT '', description TEXT);
+postgres=# create table if not exists `product` (id MEDIUMINT NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` VARCHAR(100) NOT NULL DEFAULT '', description TEXT);
 ````
 
 <a name="insert_record"></a>
@@ -318,7 +308,7 @@ Here's how to add a record, populating every field:
 # 1 and assigned to that same field when
 # a new record is created.
 # Using 0 is a placeholder; MySQL automatically updates the field properly.
-mysql> INSERT INTO product VALUES(0, 'Cool item', 'Does neat stuff');
+postgres=# INSERT INTO product VALUES(0, 'Cool item', 'Does neat stuff');
 Query OK, 1 row affected (0.13 sec)
 
 ````
@@ -327,7 +317,7 @@ Query OK, 1 row affected (0.13 sec)
 ### Doing a simple query--get a list of records (SELECT)
 
 ````
-mysql> SELECT * FROM product;
+postgres=# SELECT * FROM product;
 +----+---------------+-----------------+
 | id | name | description |
 +----+---------------+-----------------+
@@ -342,7 +332,7 @@ For more on SELECT, see the [MySQL SELECT Syntax](https://dev.mysql.com/doc/en/s
 ### Inserting several records at once
 
 ````
-mysql> INSERT INTO product VALUES
+postgres=# INSERT INTO product VALUES
 (0, 'A better item', 'Nicer stuff'),
 (0, '3rd item rocks', 'Crazy good'),
 (0, '4rth item now', 'Not so hot')
@@ -359,7 +349,7 @@ In this example, only the `name` field will be populated. The `description` colu
 Two records are added:
 
 ```sql
-mysql> INSERT INTO product (name) VALUES
+postgres=# INSERT INTO product (name) VALUES
 ('Replacement sprocket'),
 ('Power adapter')
 ;
@@ -368,7 +358,7 @@ mysql> INSERT INTO product (name) VALUES
 Let's look at our handiwork so far:
 
 ````
-mysql> select * from product;
+postgres=# select * from product;
 +----+----------------------+-----------------+
 | id | name | description |
 +----+----------------------+-----------------+
@@ -387,7 +377,7 @@ mysql> select * from product;
 Here we'll enter selected fields (in this case, `name` and `description`, leaving `id` untouched).
 
 ````
-mysql> INSERT INTO product (name, description) VALUES
+postgres=# INSERT INTO product (name, description) VALUES
 ('Thingamajig', 'Better than last year\'s thingamajig');
 ````
 
@@ -398,7 +388,7 @@ Note that the description, `Better than last year's thingamajig` , contains an a
 
 #### Let's see the result of using backslash to escape
 ````
-mysql> select * from product where id=7;
+postgres=# select * from product where id=7;
 +----+-------------+---------------------------------------------+
 | id | name | description |
 +----+-------------+---------------------------------------------+
@@ -414,7 +404,7 @@ mysql> select * from product where id=7;
 ### Showing the names of all users
 
 ````
-mysql> select User,Host from mysql.user;
+postgres=# select User,Host from mysql.user;
 +-----------+-----------+
 | User | Host |
 +-----------+-----------+
@@ -433,7 +423,7 @@ mysql> select User,Host from mysql.user;
 This lets you understand things like the name of the currently connected database, whether the connection is SSL, the port on the server side being used to connect to Cloud SQL, etc.
 
 ````
-mysql> \s
+postgres=# \s
 ````
 
 Sample output:
@@ -466,7 +456,7 @@ Threads: 1 Questions: 598 Slow queries: 0 Opens: 34 Flush tables: 1 Open tables:
 ### Learning the local port number
 
 ````
-mysql> SHOW VARIABLES WHERE Variable_name = 'port';
+postgres=# SHOW VARIABLES WHERE Variable_name = 'port';
 +---------------+-------+
 | Variable_name | Value |
 +---------------+-------+
@@ -479,7 +469,7 @@ mysql> SHOW VARIABLES WHERE Variable_name = 'port';
 ### Learning the hostname of your computer
 
 ````
-mysql> SHOW VARIABLES WHERE Variable_name = 'hostname';
+postgres=# SHOW VARIABLES WHERE Variable_name = 'hostname';
 
 +---------------+-----------------------------------+
 | Variable_name | Value |
@@ -510,6 +500,18 @@ mysql> SHOW VARIABLES WHERE Variable_name = 'hostname';
 * `psql` (the [PostgreSQL interactive terminal](https://www.postgresql.org/docs/current/app-psql.html) 
 <!---
 Boilerplate
+
+CREATE TABLE IF NOT EXISTS "rental_property" (id serial primary key);
+
+postgres=# CREATE TABLE IF NOT EXISTS account(
+ id serial PRIMARY KEY,
+ username VARCHAR (50) UNIQUE NOT NULL,
+ email VARCHAR (355) UNIQUE NOT NULL,
+ created_on TIMESTAMP NOT NULL,
+ last_login TIMESTAMP
+);
+
+
 
 ````
 [postgres=> 
