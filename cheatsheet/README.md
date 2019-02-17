@@ -127,6 +127,7 @@ You type backslash, the letter `q`, and then you press the Enter or return key.
 
 ````
 # Press enter after typing \q
+# Remember this is backslash, not forward slash
 postgres=# \q
 ````
 
@@ -134,13 +135,25 @@ This takes you back out to the operating system prompt.
 
 ### psql vs SQL commands
 
+`psql` has two different kinds of commands. Those starting with a backslash
+are for `psql` itself, as illustrated by the use of `\q` to quit.
+
+Those starting with valid SQL are of course interactive SQL used to
+create and modify PostgreSQL databases.
+
 #### Warning: SQL commands end with a semicolon!
 
 One gotcha is that almost all SQL commands you enter into `psql` must end in a semicolon. For example:
 
 ````
-# List all tables in this database
-mysql> show tables;
+postgres=# CREATE TABLE IF NOT EXISTS account(
+ id serial PRIMARY KEY,
+ username VARCHAR (50) UNIQUE NOT NULL,
+ email VARCHAR (355) UNIQUE NOT NULL,
+ created_on TIMESTAMP NOT NULL,
+ last_login TIMESTAMP
+);
+
 ````
 
 It's easy to forget. If you do, you'll see this perplexing prompt:
