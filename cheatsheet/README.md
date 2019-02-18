@@ -343,7 +343,7 @@ Indexes:
 
 ### \du Display user roles
 
-To view users and their roles, use `\du`:
+* To view users and their roles, use `\du`:
 
 ````txt
 postgres=# \du
@@ -352,6 +352,18 @@ postgres=# \du
 ------------+------------------------------------------------------------+-----------
  smanager   | Superuser                                                  | {}
  postgres   | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ tom        | Superuser, Create role, Create DB                          | {}
+````
+
+* To view the role of a specific user, pass it after the `\du` command.
+
+* To view users and their roles, use `\du`. For example, to see the `tom` role:
+
+````txt
+postgres=# \du tom
+                                    List of roles
+ Role name  |                         Attributes                         | Member of 
+------------+------------------------------------------------------------+-----------
  tom        | Superuser, Create role, Create DB                          | {}
 ````
 
