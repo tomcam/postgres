@@ -21,7 +21,7 @@ Starting and quitting the psql interactive terminal |
 
 Creating and using databases |
 -------------------------------------- |
-[Creating a database (CREATE DATABASE)](#create-database) |
+[Creating a database (CREATE DATABASE)](#creating-a-database) ) |
 [Getting a list of databases (SHOW DATABASES)](#show_databases) |
 [Choosing a database to work on (USE)](#use_database) |
 [Getting a list of tables contained in this database (SHOW TABLES)](#show_tables) |
@@ -141,7 +141,7 @@ are for `psql` itself, as illustrated by the use of `\q` to quit.
 Those starting with valid SQL are of course interactive SQL used to
 create and modify PostgreSQL databases.
 
-#### Warning: SQL commands end with a semicolon!
+### Warning: SQL commands end with a semicolon!
 
 One gotcha is that almost all SQL commands you enter into `psql` must end in a semicolon. For example:
 
@@ -163,7 +163,6 @@ When you do, just remember to finish it off with that semicolon:
 [postgres=# DROP TABLE "sample_property"
 postgres=# ;
 ````
-
 
 ## Getting information about databases
 
@@ -188,35 +187,94 @@ Available help:
 
 ### \l List databases
 
-````
+What most people think of as a database (say, a list of customers) is actually a table. A database is a group of tables, information about those tables, information about users and their permissions, and much more. Some of these databases (and the tables within) are updated automatically by PostgreSQL as you use them.
 
-<a name="show_databases"></a>
-### List databases (SHOW DATABASES)
+To get a list of all databases:
 
-What most people think of as a database (say, a list of customers) is actually a table. A database is a list of tables, information about those tables, information about users and their permissions, and much more. Some of these databases (and the tables within) are updated automatically by SQL Server as you use them.
-
-To get a list of all databases,
-
-````
-postgres=# show databases;
-+--------------------+
-| Database |
-+--------------------+
-| information_schema |
-| mysql |
-| performance_schema |
-| sampledatabase |
-+--------------------+
-4 rows in set (0.08 sec)
-````
-
-<a name="create-database"></a>
-### Creating a database (CREATE DATABASE)
-
-Before you add tables, you need to create a database to contain those tables:
+````txt
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ visitor   | tom      | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ markets   | tom      | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ tom       | tom      | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
 
 ````
-postgres=# CREATE DATABASE IF NOT EXISTS TODO;
+### \c Connect to a database
+
+To see what's inside a database, connect to it using `\c` followed by the database name. 
+The prompt changes to match the name of the database you're connecting to.
+(The one named `postgres` is always interesting.) Here we're connecting to the one named
+`markets`:
+
+````txt
+postgres=# \c markets
+psql (11.1, server 11.0)
+You are now connected to database "markets" as user "tom".
+markets=# 
+````
+
+### \dt Display tables
+
+* Use `\dt` to list all the tables (technically, *relations*) in the database:
+
+````txt
+markets=# \dt
+
+                    List of relations
+ Schema |             Name             | Type  |  Owner   
+--------+------------------------------+-------+----------
+ public | addresspool                  | table | tom
+ public | adlookup                     | table | tom
+ public | bidactivitysummary           | table | tom
+ public | bidactivitydetail            | table | tom
+ public | customerpaymentsummary       | table | tom
+ ...
+
+````
+
+* If you choose a database such as `postgres` there could be many tables.
+Remember you can pause output by pressing `q`.
+
+### \d and \d+ Display columns (field names) of a table
+
+To view the schema of a table, use `\d` followed by the name of the table. 
+
+* To view the schema of a table named `customerpaymentsummary`, enter
+
+```
+markets=# \d customerpaymentsummary
+
+                            Table "public.customerpaymentsummary"
+            Column            |            Type             | Collation | Nullable | Default 
+------------------------------+-----------------------------+-----------+----------+---------
+ usersysid                    | integer                     |           | not null | 
+ paymentattemptsall           | integer                     |           |          | 
+ paymentattemptsmailin        | integer                     |           |          | 
+ paymentattemptspaypal        | integer                     |           |          | 
+ paymentattemptscreditcard    | integer                     |           |          | 
+ paymentacceptedoutagecredit  | integer                     |           |          | 
+ totalmoneyin                 | numeric(12,2)               |           |          | 
+ updatewhen1                  | timestamp without time zone |           |          | 
+ updatewhen2                  | timestamp without time zone |           |          | 
+
+```
+
+### Creating a database
+
+Before you add tables, you need to create a database to contain those tables.
+That's not done with `psql`, but instead it's done with `createdb`
+at the operating system command line:
+
+````bash
+# Replace markets with your databasse name
+$ createdb marketd
 # Or if you're feeling brave:
 postgres=# CREATE DATABASE TODO;
 ````
@@ -227,73 +285,17 @@ The result should look like this:
 Query OK, 1 row affected (0.07 sec)
 ````
 
-<a name="use_database"></a>
-### Choosing a database to work on (USE)
-
-The `use` command lets you select a database:
-
-````
-postgres=# use sampledatabase;
-````
-
-Mysteriously, you are then informed:
-
-````
-Database changed
-````
-
-This doesn't mean the contents or state of the database have changed. It means that you have selected a new current database (the `USE` statement) to operate on.
-
-<a name="show_tables"></a>
-### Getting a list of tables contained in this database (SHOW TABLES)
-
-```sql
-postgres=# show tables;
-```
-
-In this example there are two tables in the database, `sample1` and `todo`.
-
-
-````
-+------------------------+
-| Tables_in_tomsdatabase |
-+------------------------+
-| sample1 |
-| todo |
-+------------------------+
-2 rows in set (0.06 sec)
-````
-
-<a name="show_columns_from"></a>
-### Getting a list of fields in a table (SHOW COLUMNS FROM)
-
-What are the fields (columns) in a table? Find out with `show columns from` followed by the table name.
-
-Here's an example for the `todo` table, followed by its output.
-
-````
-postgres=# show columns from todo;
-+-------------+--------------+------+-----+---------+-------+
-| Field | Type | Null | Key | Default | Extra |
-+-------------+--------------+------+-----+---------+-------+
-| title | varchar(100) | NO | | | |
-| description | text | YES | | NULL | |
-+-------------+--------------+------+-----+---------+-------+
-2 rows in set (0.08 sec)
-````
-
 ## Adding tables and records
 
-<a name="create_table"></a>
 ### Creating a table (CREATE TABLE)
 
 #### NOTE
-Before you create any tables, you must create a [database](#create-database) to contain those tables.
+Before you create any tables, you must create a [database](#creating-a-database) to contain those tables.
 
 This polite form creates a table only if one by that name is not already present. If you're feeling brave you can omit the `IF NOT EXISTS`
 
 ````
-postgres=# create table if not exists `product` (id MEDIUMINT NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` VARCHAR(100) NOT NULL DEFAULT '', description TEXT);
+postgres=# create table if not exists "product" (id MEDIUMINT NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` VARCHAR(100) NOT NULL DEFAULT '', description TEXT);
 ````
 
 <a name="insert_record"></a>
