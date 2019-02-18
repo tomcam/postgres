@@ -19,8 +19,9 @@ Starting and quitting the psql interactive terminal |
 [Opening a connection locally](#opening-a-connection-locally) |
 [Opening a connection remotely](#opening-a-connection-remotely) |
 [Looking at the psql prompt](#looking-at-the-psql-prompt) |
--------------------------------------- |
+
 Getting information about databases |
+----- |
 [\h Help](#h-help) |
 [\l List databases](#l-list-databases) |
 [\c Connect to a database](#c-connect-to-a-database) |
@@ -341,7 +342,7 @@ That's not done with `psql`, but instead it's done with `createdb`
 at the operating system command line:
 
 ````bash
-# Replace markets with your databasse name
+# Replace markets with your database name
 $ createdb marketd
 ````
 On success, there is no visual feedback. Thanks, PostgreSQL.
