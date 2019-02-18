@@ -86,7 +86,8 @@ You'll use `psql` (aka the [PostgreSQL interactive terminal](https://www.postgre
 
 ### Opening a connection locally
 
-A common case during development is 
+A common case during development is opening a connection to a local database (one on your own machine).
+Run `psql` with `-U` (for user name) followed by the name of the database, `postgres` in this example:
 ````
 # Log into Postgres as the user named postgres
 $ psql -U postgres
@@ -144,16 +145,20 @@ create and modify PostgreSQL databases.
 
 ### Warning: SQL commands end with a semicolon!
 
-One gotcha is that almost all SQL commands you enter into `psql` must end in a semicolon. For example:
+One gotcha is that almost all SQL commands you enter into `psql` must end in a semicolon. 
+
+* For example,suppose you want to remove a table named `sample_property_5`. You'd enter this command:
 
 ````
-postgres=# DROP TABLE "sample_property";
+postgres=# DROP TABLE "sample_property_5";
 ````
 
-It's easy to forget. If you do forget the semicolon, you'll see this perplexing prompt:
+It's easy to forget. If you do forget the semicolon, you'll see this perplexing prompt.
+Note that a `[` has been inserted before the username portion of the prompt, and another
+prompt appears below it. 
 
 ````
-[postgres=# DROP TABLE "sample_property"
+[postgres=# DROP TABLE "sample_property_5"
 postgres=#
 
 ````
@@ -161,7 +166,7 @@ postgres=#
 When you do, just remember to finish it off with that semicolon:
 
 ````
-[postgres=# DROP TABLE "sample_property"
+[postgres=# DROP TABLE "sample_property_5"
 postgres=# ;
 ````
 
@@ -186,6 +191,23 @@ Available help:
 
 * Press space to continue, or q to stop the output.
 
+You can get help on a particular item by listing it after the `\h` command. 
+
+* For example, to get help on `DROP TABLE`:
+
+````txt
+postgres=# \h drop table
+````
+
+You'll get help on just tha item:
+
+````txt
+Command:     DROP TABLE
+Description: remove a table
+Syntax:
+DROP TABLE [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
+````
+
 ### \l List databases
 
 What most people think of as a database (say, a list of customers) is actually a table. A database is a group of tables, information about those tables, information about users and their permissions, and much more. Some of these databases (and the tables within) are updated automatically by PostgreSQL as you use them.
@@ -207,6 +229,26 @@ postgres=# \l
  tom       | tom      | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
 
 ````
+
+You can get info on a single database by following the `\l` prompt with its name.
+
+* For example, to view information about the `template0` database:
+
+````txt
+postgres=# \l template0
+````
+
+The output would be:
+
+````txt
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+````
+
 ### \c Connect to a database
 
 To see what's inside a database, connect to it using `\c` followed by the database name. 
@@ -241,7 +283,7 @@ markets=# \dt
 ````
 
 * If you choose a database such as `postgres` there could be many tables.
-Remember you can pause output by pressing `q`.
+Remember you can pause output by pressing space or halt it by pressing `q`.
 
 ### \d and \d+ Display columns (field names) of a table
 
@@ -254,18 +296,38 @@ markets=# \d customerpaymentsummary
 
                             Table "public.customerpaymentsummary"
             Column            |            Type             | Collation | Nullable | Default 
-------------------------------+-----------------------------+-----------+----------+---------
- usersysid                    | integer                     |           | not null | 
- paymentattemptsall           | integer                     |           |          | 
- paymentattemptsmailin        | integer                     |           |          | 
- paymentattemptspaypal        | integer                     |           |          | 
- paymentattemptscreditcard    | integer                     |           |          | 
- paymentacceptedoutagecredit  | integer                     |           |          | 
- totalmoneyin                 | numeric(12,2)               |           |          | 
- updatewhen1                  | timestamp without time zone |           |          | 
- updatewhen2                  | timestamp without time zone |           |          | 
+------------------------------+-----------------------------+-----------+----------+--------
+ usersysid                    | integer                     |           | not null |        
+ paymentattemptsall           | integer                     |           |          |        
+ paymentattemptsmailin        | integer                     |           |          |        
+ paymentattemptspaypal        | integer                     |           |          |        
+ paymentattemptscreditcard    | integer                     |           |          |        
+ paymentacceptedoutagecredit  | integer                     |           |          |        
+ totalmoneyin                 | numeric(12,2)               |           |          |        
+ updatewhen1                  | timestamp without time zone |           |          |        
+ updatewhen2                  | timestamp without time zone |           |          |        
 
-```
+````
+
+To view more detailed information on a table, use `\d+`:
+````txt
+markets=# \d customerpaymentsummary
+
+                            Table "public.customerpaymentsummary"
+            Column            |            Type             | Collation | Nullable | Default | Storage | Stats target |
+------------------------------+-----------------------------+-----------+----------+---------+---------+---------------
+ usersysid                    | integer                     |           | not null |         | plain   |              |   
+ paymentattemptsall           | integer                     |           |          |         | plain   |              |   
+ paymentattemptsmailin        | integer                     |           |          |         | plain   |              |   
+ paymentattemptspaypal        | integer                     |           |          |         | plain   |              |   
+ paymentattemptscreditcard    | integer                     |           |          |         | plain   |              |   
+ paymentacceptedoutagecredit  | integer                     |           |          |         | plain   |              |    
+ totalmoneyin                 | numeric(12,2)               |           |          |         | main    |              |    
+ updatewhen1                  | timestamp without time zone |           |          |         | plain   |              |   
+ updatewhen2                  | timestamp without time zone |           |          |         | plain   |              |    
+
+Indexes:
+````
 
 ### Creating a database
 
@@ -276,15 +338,8 @@ at the operating system command line:
 ````bash
 # Replace markets with your databasse name
 $ createdb marketd
-# Or if you're feeling brave:
-postgres=# CREATE DATABASE TODO;
 ````
-
-The result should look like this:
-
-````
-Query OK, 1 row affected (0.07 sec)
-````
+On success, there is no visual feedback. Thanks, PostgreSQL.
 
 ## Adding tables and records
 
