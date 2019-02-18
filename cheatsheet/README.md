@@ -27,7 +27,7 @@ Getting information about databases |
 [\c Connect to a database](#c-connect-to-a-database) |
 [\dt Display tables](#dt-display-tables) |
 [\d and \d+ Display columns (field names) of a table](#d-and-d-display-columns-field-names-of-a-table) |
-[\du Display user roles](du-display-user-roles)
+[\du Display user roles](#du-display-user-roles)
 
 Operating on databases |
 [Creating a database (CREATE DATABASE)](#creating-a-database) ) |
