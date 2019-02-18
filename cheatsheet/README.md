@@ -16,6 +16,7 @@ as you'd use them in a typical work session.
 Starting and quitting the psql interactive terminal |
 ----- |
 [Command-line prompts for psql](#using-psql) |
+[Quitting psql](##quitting-pqsql) |
 [Opening a connection locally](#opening-a-connection-locally) |
 [Opening a connection remotely](#opening-a-connection-remotely) |
 [Looking at the psql prompt](#looking-at-the-psql-prompt) |
@@ -76,6 +77,19 @@ $ psql -U sampleuser -h production-sfo-test1-do-user-4866002-0.db.ondigitalocean
 
 You'll use `psql` (aka the [PostgreSQL interactive terminal](https://www.postgresql.org/docs/current/app-psql.html) most of all because it's used to create databases and tables, show information about tables, and even to enter information (records) into the database.
 
+### Quitting pqsql
+
+Before we learn anything else, here's how to quit `psql` and return to the operating system prompt.
+You type backslash, the letter `q`, and then you press the Enter or return key.
+
+````
+# Press enter after typing \q
+# Remember this is backslash, not forward slash
+postgres=# \q
+````
+
+This takes you back out to the operating system prompt.
+
 ### Opening a connection locally
 
 A common case during development is opening a connection to a local database (one on your own machine).
@@ -112,19 +126,6 @@ postgres=#
 ````
 
 At this point you're expected to type commands and parameters into the command line.
-
-### Quitting pqsql
-
-Before we learn anything else, here's how to quit `psql` and return to the operating system prompt.
-You type backslash, the letter `q`, and then you press the Enter or return key.
-
-````
-# Press enter after typing \q
-# Remember this is backslash, not forward slash
-postgres=# \q
-````
-
-This takes you back out to the operating system prompt.
 
 ### psql vs SQL commands
 
