@@ -15,13 +15,18 @@ as you'd use them in a typical work session.
 
 Starting and quitting the psql interactive terminal |
 ----- |
-[Command-line prompts for psql](#using_psql) |
+[Command-line prompts for psql](#using-psql) |
 [Opening a connection locally](#opening-a-connection-locally) |
 [Opening a connection remotely](#opening-a-connection-remotely) |
-[mysql CLI shortcut commands](appendix-b.md#mysql_cli_shortcuts) |
-
-Creating and using databases |
+[Looking at the psql prompt](#looking-at-the-psql-prompt) |
 -------------------------------------- |
+Getting information about databases |
+[\h Help](#h-help) |
+[\l List databases](#l-list-databases) |
+[\c Connect to a database](#c-connect-to-a-database) |
+[\dt Display tables](#dt-display-tables) |
+Operating on databases |
+[\d and \d+ Display columns (field names) of a table](#d-and-d-display-columns-field-names-of-a-table) |
 [Creating a database (CREATE DATABASE)](#creating-a-database) ) |
 [Getting a list of databases (SHOW DATABASES)](#show_databases) |
 [Choosing a database to work on (USE)](#use_database) |
