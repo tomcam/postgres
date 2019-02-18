@@ -30,6 +30,7 @@ Getting information about databases |
 [\du Display user roles](#du-display-user-roles)
 
 Operating on databases |
+----- |
 [Creating a database (CREATE DATABASE)](#creating-a-database) ) |
 [Getting a list of databases (SHOW DATABASES)](#show_databases) |
 [Choosing a database to work on (USE)](#use_database) |
