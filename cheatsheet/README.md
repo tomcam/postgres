@@ -15,8 +15,9 @@ as you'd use them in a typical work session.
 
 Starting and quitting the psql interactive terminal |
 ----- |
-[Command-line prompts for psql](#psql_prompts) |
-[Opening a connection to a remote SQL instance](#open_remote_connection) |
+[Command-line prompts for psql](#using_psql) |
+[Opening a connection locally](#opening-a-connection-locally) |
+[Opening a connection remotely](#opening-a-connection-remotely) |
 [mysql CLI shortcut commands](appendix-b.md#mysql_cli_shortcuts) |
 
 Creating and using databases |
