@@ -27,6 +27,7 @@ Getting information about databases |
 [\c Connect to a database](#c-connect-to-a-database) |
 [\dt Display tables](#dt-display-tables) |
 [\d and \d+ Display columns (field names) of a table](#d-and-d-display-columns-field-names-of-a-table) |
+[\du Display user roles](du-display-user-roles)
 
 Operating on databases |
 [Creating a database (CREATE DATABASE)](#creating-a-database) ) |
@@ -340,7 +341,21 @@ markets=# \d customerpaymentsummary
 Indexes:
 ````
 
-### Creating a database
+### \du Display user roles
+
+To view users and their roles, use `\du`:
+
+````txt
+postgres=# \du
+                                    List of roles
+ Role name  |                         Attributes                         | Member of 
+------------+------------------------------------------------------------+-----------
+ smanager   | Superuser                                                  | {}
+ postgres   | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ tom        | Superuser, Create role, Create DB                          | {}
+````
+
+## Creating a database
 
 Before you add tables, you need to create a database to contain those tables.
 That's not done with `psql`, but instead it's done with `createdb`
