@@ -26,8 +26,9 @@ Getting information about databases |
 [\l List databases](#l-list-databases) |
 [\c Connect to a database](#c-connect-to-a-database) |
 [\dt Display tables](#dt-display-tables) |
-Operating on databases |
 [\d and \d+ Display columns (field names) of a table](#d-and-d-display-columns-field-names-of-a-table) |
+
+Operating on databases |
 [Creating a database (CREATE DATABASE)](#creating-a-database) ) |
 [Getting a list of databases (SHOW DATABASES)](#show_databases) |
 [Choosing a database to work on (USE)](#use_database) |
@@ -160,7 +161,7 @@ postgres=# DROP TABLE "sample_property_5";
 
 It's easy to forget. If you do forget the semicolon, you'll see this perplexing prompt.
 Note that a `[` has been inserted before the username portion of the prompt, and another
-prompt appears below it. 
+prompt appears below it:
 
 ````
 [postgres=# DROP TABLE "sample_property_5"
@@ -176,6 +177,11 @@ postgres=# ;
 ````
 
 ## Getting information about databases
+
+These aren't SQL commands so just press Enter after them. Remember that:
+
+* When there's more output than fits the screen, it pauses. Press space to continue
+* If you want to halt the output, press `q`.
 
 ### \h Help
 
