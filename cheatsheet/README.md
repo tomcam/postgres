@@ -29,31 +29,14 @@ Getting information about databases |
 [\d and \d+ Display columns (field names) of a table](#d-and-d-display-columns-field-names-of-a-table) |
 [\du Display user roles](#du-display-user-roles)
 
-Operating on databases |
------ |
-[Creating a database (CREATE DATABASE)](#creating-a-database) ) |
-[Getting a list of databases (SHOW DATABASES)](#show_databases) |
-[Choosing a database to work on (USE)](#use_database) |
-[Getting a list of tables contained in this database (SHOW TABLES)](#show_tables) |
-[Getting a list of fields in a table (SHOW COLUMNS FROM)](#show_columns_from) |
-
 Creating and using tables and records |
 ------- |
-[Creating a table (CREATE TABLE)](#create_table) |
-[Adding a record (INSERT INTO)](#insert_record) |
+[Creating a table (CREATE TABLE)](#create-table) |
+[Adding a record (INSERT INTO)](#insert-record) |
 [Doing a simple query--get a list of records (SELECT)](#select) |
-[Inserting several records at once (INSERT INTO)](#insert_multiple_records) |
-[Adding only specific fields from a record](#insert_specific_fields) |
-[Specifying multiple fields](#specify_multiple_fields) |
-[Using backslash to enter special characters](#backslash_special_characters) |
+[Inserting several records at once (INSERT INTO)](#insert-multiple-records) |
+[Adding only specific fields from a record](#insert-specific-fields) |
 
-Diagnostic commands |
----- |
-[Showing the names of all users](#show_all_users) |
-[Getting server information](#server_information) |
-[Learning the local port number](#port_number) |
-[Learning the hostname of your computer](#show_host_name) |
-[Getting the name of the current user (SELECT USER())](#select_user) |
 
 ## What you need to know
 
@@ -384,211 +367,101 @@ On success, there is no visual feedback. Thanks, PostgreSQL.
 
 ### Creating a table (CREATE TABLE)
 
-#### NOTE
-Before you create any tables, you must create a [database](#creating-a-database) to contain those tables.
+To add a table schema to the database:
 
-This polite form creates a table only if one by that name is not already present. If you're feeling brave you can omit the `IF NOT EXISTS`
-
+````sql
+postgres=# create table if not exists product (
+  id              SERIAL,
+  name            VARCHAR(100) NOT NULL,
+  sku             CHAR(8)
+);
 ````
-postgres=# create table if not exists "product" (id MEDIUMINT NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` VARCHAR(100) NOT NULL DEFAULT '', description TEXT);
-````
 
-<a name="insert_record"></a>
+And `psql` responds with:
+
+````sql
+CREATE TABLE
+```
+
 ### Adding a record (INSERT INTO)
 
-Here's how to add a record, populating every field:
+* Here's how to add a record, populating every field:
 
-````
+````sql
 # The id field is an automatically assigned
-# unique number. The autoincrement means
+# when you use DEFAULT. The serial primary key means
 # that number will be increased by at least
 # 1 and assigned to that same field when
 # a new record is created.
-# Using 0 is a placeholder; MySQL automatically updates the field properly.
-postgres=# INSERT INTO product VALUES(0, 'Cool item', 'Does neat stuff');
-Query OK, 1 row affected (0.13 sec)
-
+# Using DEFAULT is a placeholder. 
+# In its place PostgreSQL automatically generates a unique integer for it.
+postgres=# INSERT INTO product VALUES(DEFAULT, 'Apple, Fuji', '4131');
 ````
 
-<a name="select"></a>
-### Doing a simple query--get a list of records (SELECT)
+PostgreSQL responds with:
 
-````
-postgres=# SELECT * FROM product;
-+----+---------------+-----------------+
-| id | name | description |
-+----+---------------+-----------------+
-| 1 | Cool item | Does neat stuff |
-+----+---------------+-----------------+
-
+````sql
+INSERT 0 1
 ````
 
-For more on SELECT, see the [MySQL SELECT Syntax](https://dev.mysql.com/doc/en/select.html).
+* Try it again and you get a simliar response.
 
-<a name="insert_multiple_records"></a>
-### Inserting several records at once
+````sql
+postgres=# INSERT INTO product VALUES(DEFAULT, 'Banana', '4011');
+INSERT 0 1
+````
+
+### Adding (inserting) several records at once
+
+* You can enter a list of records using this syntax:
 
 ````
 postgres=# INSERT INTO product VALUES
-(0, 'A better item', 'Nicer stuff'),
-(0, '3rd item rocks', 'Crazy good'),
-(0, '4rth item now', 'Not so hot')
+(DEFAULT, 'Carrots', 4562),
+(DEFAULT, 'Durian', 5228)
 ;
 ````
 
-<a name="insert_specific_fields"></a>
-#### Adding only specific fields from a record
+### Doing a simple query--get a list of records (SELECT)
+
+* Let's list all the records in the `product` table:
+
+````
+postgres=# SELECT * FROM product;
+````
+
+The response:
+
+````txt
+postgres=# select * from product;
+ id |    name     |   sku    
+----+-------------+----------
+  1 | Apple, Fuji | 4131    
+  2 | Banana      | 4011    
+(2 rows)
+````
+For more on SELECT, see the PostgreSQL [SELECT statement](https://www.postgresql.org/docs/current/sql-select.html).
+
+
+#### Adding only specific (columns) fields from a record
 
 You can add records but specify only selected fields (also known as columns). MySQL will use common sense default values for the rest.
 
-In this example, only the `name` field will be populated. The `description` column is left blank, and the `id` column is incremented and inserted.
+In this example, only the `name` field will be populated. The `sku` column is left blank, and the `id` column is incremented and inserted.
 
 Two records are added:
 
 ```sql
 postgres=# INSERT INTO product (name) VALUES
-('Replacement sprocket'),
-('Power adapter')
+('Endive'),
+('Figs')
 ;
 ```
 
-Let's look at our handiwork so far:
+PostgreSQL responds with the number of records inserted:
 
-````
-postgres=# select * from product;
-+----+----------------------+-----------------+
-| id | name | description |
-+----+----------------------+-----------------+
-| 1 | Cool item | Does neat stuff |
-| 2 | A better item | Nicer stuff |
-| 3 | 3rd item rocks | Crazy good |
-| 4 | 4rth item now | Not so hot |
-| 5 | Replacement sprocket | NULL |
-| 6 | Power adapter | NULL |
-+----+----------------------+-----------------+
-````
-
-<a name="specify_multiple_fields"></a>
-### Specifying multiple fields
-
-Here we'll enter selected fields (in this case, `name` and `description`, leaving `id` untouched).
-
-````
-postgres=# INSERT INTO product (name, description) VALUES
-('Thingamajig', 'Better than last year\'s thingamajig');
-````
-
-<a name="backslash_special_characters"></a>
-### Using backslash to enter special characters
-
-Note that the description, `Better than last year's thingamajig` , contains an apostrophe (`'`) character which would confuse MySQL. It is escaped using the backslash (`\`) as shown above.
-
-#### Let's see the result of using backslash to escape
-````
-postgres=# select * from product where id=7;
-+----+-------------+---------------------------------------------+
-| id | name | description |
-+----+-------------+---------------------------------------------+
-| 7 | Thingamajig | A real upgrade from last year's thingamajig |
-+----+-------------+---------------------------------------------+
-1 row in set (0.06 sec)
-
-````
-
-## Diagnostic commands
-
-<a name="show_all_users"></a>
-### Showing the names of all users
-
-````
-postgres=# select User,Host from mysql.user;
-+-----------+-----------+
-| User | Host |
-+-----------+-----------+
-| mysql.sys | localhost |
-| root | localhost |
-| testuser | localhost |
-+-----------+-----------+
-3 rows in set (0.00 sec)
-
-````
-
-
-<a name="server_information"></a>
-### Getting server information
-
-This lets you understand things like the name of the currently connected database, whether the connection is SSL, the port on the server side being used to connect to Cloud SQL, etc.
-
-````
-postgres=# \s
-````
-
-Sample output:
-
-````
-mysql Ver 14.14 Distrib 5.6.26, for osx10.8 (x86_64) using EditLine wrapper
-
-Connection id: 8
-Current database: sampledatabase
-Current user: sampleuser@24.256.250.165
-SSL: Not in use
-Current pager: stdout
-Using outfile: ''
-Using delimiter: ;
-Server version: 5.6.26 (Google)
-Protocol version: 10
-Connection: 173.256.255.122 via TCP/IP
-Server characterset: utf8
-Db characterset: utf8
-Client characterset: utf8
-Conn. characterset: utf8
-TCP port: 3306
-Uptime: 1 hour 13 min 52 sec
-
-Threads: 1 Questions: 598 Slow queries: 0 Opens: 34 Flush tables: 1 Open tables: 24 Queries per second avg: 0.134
-
-````
-
-<a name="port_number"></a>
-### Learning the local port number
-
-````
-postgres=# SHOW VARIABLES WHERE Variable_name = 'port';
-+---------------+-------+
-| Variable_name | Value |
-+---------------+-------+
-| port | 3307 |
-+---------------+-------+
-1 row in set (0.00 sec)
-````
-
-<a name="show_host_name"></a>
-### Learning the hostname of your computer
-
-````
-postgres=# SHOW VARIABLES WHERE Variable_name = 'hostname';
-
-+---------------+-----------------------------------+
-| Variable_name | Value |
-+---------------+-----------------------------------+
-| hostname | tomsmbairhydra.hsd.wa.comcast.net |
-+---------------+-----------------------------------+
-1 row in set (0.00 sec)
-````
-
-<a name="select_user"></a>
-### Getting the name of the current user (SELECT USER())
-
-````
-[postgres=> select user();
-
-+---------------+
-| user() |
-+---------------+
-| tom@localhost |
-+---------------+
-1 row in set (0.00 sec)
-
+````txt
+INSERT 0 2
 ````
 
 # Reference
@@ -609,11 +482,6 @@ postgres=# CREATE TABLE IF NOT EXISTS account(
 );
 
 
-
-````
-[postgres=> 
-
-````
 -->
 
 
