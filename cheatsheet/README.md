@@ -122,7 +122,6 @@ The name of the current database appears before the prmopt.
 psql (11.1, server 11.0)
 Type "help" for help.
 
-
 postgres=# 
 ````
 
