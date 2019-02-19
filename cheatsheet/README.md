@@ -35,8 +35,8 @@ Creating and using tables and records |
 [Creating a table (CREATE TABLE)](#creating-a-table-create-table) |
 [Adding a record (INSERT INTO)](#adding-a-record-insert-into) |
 [Doing a simple query--get a list of records (SELECT)](#doing-a-simple-query--get-a-list-of-records-select) |
-[Inserting several records at once (INSERT INTO)](#adding-only-specific-columns-fields-from-a-record) |
-[Adding only specific fields from a record](#insert-specific-fields) |
+[Inserting several records at once (INSERT INTO)](#adding-inserting-several-records-at-once) |
+[Adding only specific fields from a record](#adding-only-specific-columns-fields-from-a-record) |
 
 
 ## What you need to know
