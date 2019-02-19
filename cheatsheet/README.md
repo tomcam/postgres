@@ -1,5 +1,16 @@
 # psql command line cheat sheet
 
+If you've installeld PostgreSQL, this section serves as both a brief tutorial and as a 
+quick reference for the absolute least you need to know about `psql`. It shows how to
+do the following at the `psql` prompt:
+
+* [Start and quit `psql`](#opening-a-connection-locally)
+* [Get help](#h-help)
+* [Get information about databases](#getting-information-about-databases)
+* [Create databases]((#creating-a-database))
+* [Create tables](#creating-a-table-create-table)
+* [INSERT, or add records to a table](#adding-a-record-insert-into)
+* [SELECT, to do simple queries](#doing-a-simple-query--get-a-list-of-records-select)
 
 ## The psql command line utility
 
@@ -32,11 +43,12 @@ Getting information about databases |
 
 Creating and using tables and records |
 ------- |
+[Creating a database](#creating-a-database)
 [Creating a table (CREATE TABLE)](#creating-a-table-create-table) |
 [Adding a record (INSERT INTO)](#adding-a-record-insert-into) |
-[Doing a simple query--get a list of records (SELECT)](#doing-a-simple-query--get-a-list-of-records-select) |
 [Inserting several records at once (INSERT INTO)](#adding-inserting-several-records-at-once) |
 [Adding only specific fields from a record](#adding-only-specific-columns-fields-from-a-record) |
+[Doing a simple query--get a list of records (SELECT)](#doing-a-simple-query--get-a-list-of-records-select) |
 
 
 ## What you need to know
@@ -423,26 +435,6 @@ postgres=# INSERT INTO product VALUES
 ;
 ````
 
-### Doing a simple query--get a list of records (SELECT)
-
-* Let's list all the records in the `product` table:
-
-````
-postgres=# SELECT * FROM product;
-````
-
-The response:
-
-````txt
-postgres=# select * from product;
- id |    name     |   sku    
-----+-------------+----------
-  1 | Apple, Fuji | 4131    
-  2 | Banana      | 4011    
-(2 rows)
-````
-For more on SELECT, see the PostgreSQL [SELECT statement](https://www.postgresql.org/docs/current/sql-select.html).
-
 
 #### Adding only specific (columns) fields from a record
 
@@ -464,6 +456,27 @@ PostgreSQL responds with the number of records inserted:
 ````txt
 INSERT 0 2
 ````
+
+### Doing a simple query--get a list of records (SELECT)
+
+* Let's list all the records in the `product` table:
+
+````
+postgres=# SELECT * FROM product;
+````
+
+The response:
+
+````txt
+postgres=# select * from product;
+ id |    name     |   sku    
+----+-------------+----------
+  1 | Apple, Fuji | 4131    
+  2 | Banana      | 4011    
+(2 rows)
+````
+For more on SELECT, see the PostgreSQL [SELECT statement](https://www.postgresql.org/docs/current/sql-select.html).
+
 
 # Reference
 
