@@ -1,8 +1,11 @@
 # psql command line cheat sheet
 
 If you've installeld PostgreSQL, this section serves as both a brief tutorial and as a 
-quick reference for the absolute least you need to know about `psql`. It shows how to
-do the following at the `psql` prompt:
+quick reference for the absolute least you need to know about `psql`. If you're
+not familiar with database administration just read through the whole thing and
+type in the examples.
+
+It shows how to do the following at the `psql` prompt:
 
 * [Start and quit `psql`](#opening-a-connection-locally)
 * [Get help](#h-help)
@@ -12,6 +15,10 @@ do the following at the `psql` prompt:
 * [INSERT, or add records to a table](#adding-a-record-insert-into)
 * [SELECT, to do simple queries](#doing-a-simple-query--get-a-list-of-records-select)
 * [Reference](#reference) pointing to the official PostgreSQL documentation
+
+If you don't access to a live PostgreSQL installation we still have your back.
+You can follow through the examples and the output is shown as if you
+did type everything out.
 
 ## The psql command line utility
 
