@@ -7,7 +7,7 @@ do the following at the `psql` prompt:
 * [Start and quit `psql`](#opening-a-connection-locally)
 * [Get help](#h-help)
 * [Get information about databases](#getting-information-about-databases)
-* [Create databases]((#creating-a-database))
+* [Create databases](#creating-a-database)
 * [Create tables](#creating-a-table-create-table)
 * [INSERT, or add records to a table](#adding-a-record-insert-into)
 * [SELECT, to do simple queries](#doing-a-simple-query--get-a-list-of-records-select)
@@ -340,7 +340,7 @@ Indexes:
 
 ### \du Display user roles
 
-* To view users and their roles, use `\du`:
+* To view all users and their roles, use `\du`:
 
 ````txt
 postgres=# \du
@@ -353,8 +353,7 @@ postgres=# \du
 ````
 
 * To view the role of a specific user, pass it after the `\du` command.
-
-* To view users and their roles, use `\du`. For example, to see the `tom` role:
+For example, to see the only `tom` role:
 
 ````txt
 postgres=# \du tom
@@ -368,11 +367,11 @@ postgres=# \du tom
 
 Before you add tables, you need to create a database to contain those tables.
 That's not done with `psql`, but instead it's done with `createdb`
-at the operating system command line:
+(a separate external command; see the PostgreSQL [createdb](https://www.postgresql.org/docs/current/app-createdb.html) documentation) at the operating system command line:
 
 ````bash
 # Replace markets with your database name
-$ createdb marketd
+$ createdb markets
 ````
 On success, there is no visual feedback. Thanks, PostgreSQL.
 
@@ -395,6 +394,8 @@ And `psql` responds with:
 ````sql
 CREATE TABLE
 ````
+
+For more see  `CREATE TABLE` in the [PostgreSQL official docs](https://www.postgresql.org/docs/10/sql-createtable.html).
 
 ### Adding a record (INSERT INTO)
 
@@ -457,6 +458,8 @@ PostgreSQL responds with the number of records inserted:
 INSERT 0 2
 ````
 
+For more on INSERT, see `INSERT` in the [PostgreSQL official docs](https://www.postgresql.org/docs/current/sql-insert.html)
+
 ### Doing a simple query--get a list of records (SELECT)
 
 * Let's list all the records in the `product` table:
@@ -475,13 +478,16 @@ postgres=# select * from product;
   2 | Banana      | 4011    
 (2 rows)
 ````
-For more on SELECT, see the PostgreSQL [SELECT statement](https://www.postgresql.org/docs/current/sql-select.html).
+For more on SELECT, see the `SELECT` in the [PostgreSQL official docs](https://www.postgresql.org/docs/current/sql-select.html).
 
 
 # Reference
 
 * PostgreSQL offical docs: [Server Administration](https://www.postgresql.org/docs/current/admin.html)
-* `psql` (the [PostgreSQL interactive terminal](https://www.postgresql.org/docs/current/app-psql.html) 
+* `psql` , a.k.a the [PostgreSQL interactive terminal](https://www.postgresql.org/docs/current/app-psql.html) 
+* `createdb` in the [PostgreSQL offical docs](https://www.postgresql.org/docs/current/app-createdb.html)
+* `CREATE TABLE` in the [PostgreSQL official docs](https://www.postgresql.org/docs/current/sql-createtable.html)
+* `INSERT` in the [PostgreSQL official docs](https://www.postgresql.org/docs/current/sql-insert.html)
 <!---
 Boilerplate
 
