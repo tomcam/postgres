@@ -11,6 +11,7 @@ do the following at the `psql` prompt:
 * [Create tables](#creating-a-table-create-table)
 * [INSERT, or add records to a table](#adding-a-record-insert-into)
 * [SELECT, to do simple queries](#doing-a-simple-query--get-a-list-of-records-select)
+* [Reference](#reference) pointing to the official PostgreSQL documentation
 
 ## The psql command line utility
 
