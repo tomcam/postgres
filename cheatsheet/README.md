@@ -32,10 +32,10 @@ Getting information about databases |
 
 Creating and using tables and records |
 ------- |
-[Creating a table (CREATE TABLE)](##creating-a-table-create-table) |
-[Adding a record (INSERT INTO)](#insert-record) |
-[Doing a simple query--get a list of records (SELECT)](#select) |
-[Inserting several records at once (INSERT INTO)](#insert-multiple-records) |
+[Creating a table (CREATE TABLE)](#creating-a-table-create-table) |
+[Adding a record (INSERT INTO)](#adding-a-record-insert-into) |
+[Doing a simple query--get a list of records (SELECT)](#doing-a-simple-query--get-a-list-of-records-select) |
+[Inserting several records at once (INSERT INTO)](#adding-only-specific-columns-fields-from-a-record) |
 [Adding only specific fields from a record](#insert-specific-fields) |
 
 
