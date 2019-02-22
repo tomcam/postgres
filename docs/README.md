@@ -44,23 +44,23 @@ This section isn't a full cheat sheet for `psql`.
 It covers the most common operations and shows them roughly in sequence, 
 as you'd use them in a typical work session.
 
-Starting and quitting the psql interactive terminal |
------ |
+| Starting and quitting the psql interactive terminal | 
+| ----- |
 [Command-line prompts for psql](#using-psql) |
 [Quitting psql](##quitting-pqsql) |
 [Opening a connection locally](#opening-a-connection-locally) |
 [Opening a connection remotely](#opening-a-connection-remotely) |
 [Looking at the psql prompt](#looking-at-the-psql-prompt) |
-Getting information about databases |
------ |
+| Getting information about databases |
+| ----- |
 [\h Help](#h-help) |
 [\l List databases](#l-list-databases) |
 [\c Connect to a database](#c-connect-to-a-database) |
 [\dt Display tables](#dt-display-tables) |
 [\d and \d+ Display columns (field names) of a table](#d-and-d-display-columns-field-names-of-a-table) |
 [\du Display user roles](#du-display-user-roles)
-Creating and using tables and records |
-------- |
+| Creating and using tables and records |
+| ------- |
 [Creating a database](#creating-a-database)
 [Creating a table (CREATE TABLE)](#creating-a-table-create-table) |
 [Adding a record (INSERT INTO)](#adding-a-record-insert-into) |
