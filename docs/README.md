@@ -1,4 +1,4 @@
-# psql command line cheat sheet
+# psql command line tutorial and cheat sheet
 
 You've installeld PostgreSQL. Now what? I assume you've been given a task that 
 uses `psql` and you want to learn the absolute minimum to
