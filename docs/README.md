@@ -1,9 +1,21 @@
 # psql command line cheat sheet
 
-If you've installeld PostgreSQL, this section serves as both a brief tutorial and as a 
-quick reference for the absolute least you need to know about `psql`. If you're
-not familiar with database administration just read through the whole thing and
-type in the examples.
+You've installeld PostgreSQL. Now what? I assume you've been given a task that 
+uses `psql` and you want to learn the absolute minimum to
+get the job done.
+
+This is both a brief tutorial and a 
+quick reference for the absolute least you need to know about `psql`. 
+I assume you're familiar with the command line and have a rough idea about
+what database administration tasks, but aren't familiar with how to
+use `psql` to do the basics. 
+
+The [PostgreSQL documentation](https://www.postgresql.org/docs/manuals/) is incredibly 
+well written and through, but frankly, I didn't know where to start reading. This
+is my answer to that problem.
+
+If you have any complaints or suggestions please let me know by 
+sending your feedback to tomcampbell@gmail.com.
 
 It shows how to do the following at the `psql` prompt:
 
@@ -26,7 +38,7 @@ Many administrative tasks can or should be done on your local machine,
 even though if database lives on the cloud.
 You can do some of them through a visual user interface, but that's not covered here. 
 Knowing how to perform these operations on the command line means you can script them,
-and scripting means you can automate tests, error checking, and so on. 
+and scripting means you can automate tests, check errors, and do data entry on the command line.
 
 This section isn't a full cheat sheet for `psql`.
 It covers the most common operations and shows them roughly in sequence, 
