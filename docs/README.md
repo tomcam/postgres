@@ -51,7 +51,6 @@ Starting and quitting the psql interactive terminal |
 [Opening a connection locally](#opening-a-connection-locally) |
 [Opening a connection remotely](#opening-a-connection-remotely) |
 [Looking at the psql prompt](#looking-at-the-psql-prompt) |
-
 Getting information about databases |
 ----- |
 [\h Help](#h-help) |
@@ -60,7 +59,6 @@ Getting information about databases |
 [\dt Display tables](#dt-display-tables) |
 [\d and \d+ Display columns (field names) of a table](#d-and-d-display-columns-field-names-of-a-table) |
 [\du Display user roles](#du-display-user-roles)
-
 Creating and using tables and records |
 ------- |
 [Creating a database](#creating-a-database)
