@@ -52,7 +52,6 @@ as you'd use them in a typical work session.
 | [Opening a connection remotely](#opening-a-connection-remotely) |
 | [Looking at the psql prompt](#looking-at-the-psql-prompt) |
 | Getting information about databases |
-| --- |
 | [\h Help](#h-help) |
 | [\l List databases](#l-list-databases) |
 | [\c Connect to a database](#c-connect-to-a-database) |
@@ -60,7 +59,6 @@ as you'd use them in a typical work session.
 | [\d and \d+ Display columns (field names) of a table](#d-and-d-display-columns-field-names-of-a-table) |
 | [\du Display user roles](#du-display-user-roles) |
 | Creating and using tables and records |
-| --- |
 | [Creating a database](#creating-a-database) |
 | [Creating a table (CREATE TABLE)](#creating-a-table-create-table) |
 | [Adding a record (INSERT INTO)](#adding-a-record-insert-into) |
