@@ -1,6 +1,6 @@
 # psql command line tutorial and cheat sheet
 
-You've installeld PostgreSQL. Now what? I assume you've been given a task that 
+You've installed PostgreSQL. Now what? I assume you've been given a task that 
 uses `psql` and you want to learn the absolute minimum to
 get the job done.
 
