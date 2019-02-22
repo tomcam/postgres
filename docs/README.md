@@ -506,23 +506,6 @@ For more on SELECT, see the `SELECT` in the [PostgreSQL official docs](https://w
 * `createdb` in the [PostgreSQL offical docs](https://www.postgresql.org/docs/current/app-createdb.html)
 * `CREATE TABLE` in the [PostgreSQL official docs](https://www.postgresql.org/docs/current/sql-createtable.html)
 * `INSERT` in the [PostgreSQL official docs](https://www.postgresql.org/docs/current/sql-insert.html)
-<!---
-Boilerplate
-
-CREATE TABLE IF NOT EXISTS "rental_property" (id serial primary key);
-
-postgres=# CREATE TABLE IF NOT EXISTS account(
- id serial PRIMARY KEY,
- username VARCHAR (50) UNIQUE NOT NULL,
- email VARCHAR (355) UNIQUE NOT NULL,
- created_on TIMESTAMP NOT NULL,
- last_login TIMESTAMP
-);
-
-
--->
-
-
 
 
 
