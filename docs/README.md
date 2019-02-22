@@ -25,7 +25,7 @@ It shows how to do the following at the `psql` prompt:
 * [Create databases](#creating-a-database)
 * [Create tables](#creating-a-table-create-table)
 * [INSERT, or add records to a table](#adding-a-record-insert-into)
-* [SELECT, to do simple queries](#doing-a-simple-query--get-a-list-of-records-select)
+* [SELECT, to do simple queries](#doing-a-simple-queryget-a-list-of-records-select)
 * [Reference](#reference) pointing to the official PostgreSQL documentation
 
 If you don't access to a live PostgreSQL installation we still have your back.
