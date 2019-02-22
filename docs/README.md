@@ -91,7 +91,7 @@ $ psql -U sampleuser -h localhost
 A line starting with `#` represents a comment. Same for everything to the right of a `#`. 
 If you accidentally type it or copy and paste it in, don't worry. Nothing will happen.
 
-````
+````bash
 This worked to connect to Postgres on DigitalOcean
 # -U is the username (it will appear in the \l command)
 # -h is the name of the machine where the server is running.
@@ -134,7 +134,7 @@ $ psql -U postgres
 To connect your remote PostgreSQL instance from your local machine, use `psql` at your operating system command line.
 Here's a typical connection.
 
-````
+````bash
 # -U is the username (it will appear in the \l command)
 # -h is the name of the machine where the server is running.
 # -p is the port where the database listens to connections. Default is 5432.
