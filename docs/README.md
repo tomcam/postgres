@@ -216,7 +216,7 @@ Available help:
 :
 ````
 
-* Press space to continue, or q to stop the output.
+* Press space to continue, or `q` to stop the output.
 
 You can get help on a particular item by listing it after the `\h` command. 
 
