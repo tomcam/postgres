@@ -72,9 +72,7 @@ as you'd use them in a typical work session.
 Before using this section, you'll need:
 
 * The user name and password for your PostgreSQL database
-* The [IP address of your remote instance](configuration.md#determining_ip_address)
-* Possibly, [your own IP address](configuration.md#determining_your_ip_address) if you have difficulty connecting.
-
+* The IP address of your remote instance
 
 ### Command-line prompts on the operating system
 
