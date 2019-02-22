@@ -23,7 +23,7 @@ It shows how to do the following at the `psql` prompt:
 * [Get help](#h-help)
 * [Get information about databases](#getting-information-about-databases)
 * [Create databases](#creating-a-database)
-* [Create tables](#creating-a-table-create-table)
+* [CREATE TABLEs](#creating-a-table-create-table)
 * [INSERT, or add records to a table](#adding-a-record-insert-into)
 * [SELECT, to do simple queries](#doing-a-simple-queryget-a-list-of-records-select)
 * [Reference](#reference) pointing to the official PostgreSQL documentation
