@@ -237,7 +237,7 @@ DROP TABLE [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
 
 ### \l List databases
 
-What most people think of as a database (say, a list of customers) is actually a table. A database is a group of tables, information about those tables, information about users and their permissions, and much more. Some of these databases (and the tables within) are updated automatically by PostgreSQL as you use them.
+What most people think of as a database (say, a list of customers) is actually a table. A database is a set of tables, information about those tables, information about users and their permissions, and much more. Some of these databases (and the tables within) are updated automatically by PostgreSQL as you use them.
 
 To get a list of all databases:
 
@@ -480,6 +480,10 @@ For more on INSERT, see `INSERT` in the [PostgreSQL official docs](https://www.p
 
 ### Doing a simple query--get a list of records (SELECT)
 
+Probably the most common thing you'll do with a table is to obtain information about it
+with the `SELECT` statement. It's a [huge topic](https://www.postgresql.org/docs/current/sql-select.html)
+
+
 * Let's list all the records in the `product` table:
 
 ````sql
@@ -495,6 +499,15 @@ postgres=# select * from product;
   1 | Apple, Fuji | 4131    
   2 | Banana      | 4011    
 (2 rows)
+````
+
+#### Note
+
+If your table has mixed case objects such as column names or indexes, you'll need to enclose them in double quotes. 
+For example, If a column name were `Product` instead of `product` your query would need to look like this:
+
+````sql
+SELECT * FROM "product";
 ````
 For more on SELECT, see the `SELECT` in the [PostgreSQL official docs](https://www.postgresql.org/docs/current/sql-select.html).
 
