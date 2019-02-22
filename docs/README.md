@@ -419,7 +419,7 @@ For more see  `CREATE TABLE` in the [PostgreSQL official docs](https://www.postg
 
 * Here's how to add a record, populating every field:
 
-````sql
+````bash
 # The id field is an automatically assigned
 # when you use DEFAULT. The serial primary key means
 # that number will be increased by at least
@@ -482,7 +482,7 @@ For more on INSERT, see `INSERT` in the [PostgreSQL official docs](https://www.p
 
 * Let's list all the records in the `product` table:
 
-````
+````sql
 postgres=# SELECT * FROM product;
 ````
 
