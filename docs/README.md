@@ -101,7 +101,7 @@ $ psql -U sampleuser -h production-sfo-test1-do-user-4866002-0.db.ondigitalocean
 ````
 ## Using psql
 
-You'll use `psql` (aka the [PostgreSQL interactive terminal](https://www.postgresql.org/docs/current/app-psql.html) most of all because it's used to create databases and tables, show information about tables, and even to enter information (records) into the database.
+You'll use `psql` (aka the [PostgreSQL interactive terminal](https://www.postgresql.org/docs/current/app-psql.html)) most of all because it's used to create databases and tables, show information about tables, and even to enter information (records) into the database.
 
 ### Quitting pqsql
 
