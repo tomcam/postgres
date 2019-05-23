@@ -431,9 +431,9 @@ postgres=# INSERT INTO product VALUES(DEFAULT, 'Apple, Fuji', '4131');
 
 PostgreSQL responds with:
 
-````sql
+```sql
 INSERT 0 1
-````
+```
 
 * Try it again and you get a simliar response.
 
@@ -492,14 +492,14 @@ postgres=# SELECT * FROM product;
 
 The response:
 
-````txt
+```txt
 postgres=# select * from product;
  id |    name     |   sku    
 ----+-------------+----------
   1 | Apple, Fuji | 4131    
   2 | Banana      | 4011    
 (2 rows)
-````
+```
 
 #### Note
 
