@@ -25,7 +25,7 @@ It shows how to do the following at the `psql` prompt:
 * [Create databases](#creating-a-database)
 * [CREATE TABLEs](#creating-a-table-create-table)
 * [INSERT, or add records to a table](#adding-a-record-insert-into)
-* [SELECT, to do simple queries](#doing-a-simple-queryget-a-list-of-records-select)
+* [SELECT, to do simple queries](#select)
 * [Reference](#reference) pointing to the official PostgreSQL documentation
 
 If you don't access to a live PostgreSQL installation we still have your back.
@@ -65,6 +65,9 @@ as you'd use them in a typical work session.
 | [Inserting several records at once (INSERT INTO)](#adding-inserting-several-records-at-once) |
 | [Adding only specific fields from a record](#adding-only-specific-columns-fields-from-a-record) |
 | [Doing a simple query--get a list of records (SELECT)](#doing-a-simple-query--get-a-list-of-records-select) |
+| **Maintenance and operations** |
+| [Maintenance](#maintenance) |
+
 
 
 ## What you need to know
@@ -474,6 +477,7 @@ INSERT 0 2
 
 For more on INSERT, see `INSERT` in the [PostgreSQL official docs](https://www.postgresql.org/docs/current/sql-insert.html)
 
+<a id="select"></a>
 ### Doing a simple query--get a list of records (SELECT)
 
 Probably the most common thing you'll do with a table is to obtain information about it
@@ -482,9 +486,9 @@ with the `SELECT` statement. It's a [huge topic](https://www.postgresql.org/docs
 
 * Let's list all the records in the `product` table:
 
-````sql
+```sql
 postgres=# SELECT * FROM product;
-````
+```
 
 The response:
 
@@ -507,16 +511,24 @@ SELECT * FROM "product";
 ````
 For more on SELECT, see the `SELECT` in the [PostgreSQL official docs](https://www.postgresql.org/docs/current/sql-select.html).
 
+<a id="maintenance"></a>
 ## Maintenance and operations issues
 
 ### Locate the pg_hba.conf file
 
+Postgres configuration is stored in a file named `pg_hba.conf` *somewhere* in the file system, but
+that location varies widely. The way to find it is to use `show  hba_file` like this:
 
+```sql
+show  hba_file;
+```
+
+See below for hot reloading this file while Postgres is running.
 
 ### Reload the configuration file while Postgres is running
 
-If you make changes to the Postgres configuration sometimes you need to restart.
-But you may just choose to reload the configuration file like this:
+If you make changes to the `pg_hba.conf` Postgres configuration sometimes you need to restart.
+But you may just choose to reload the `pg_hba.conf` configuration file like this:
 
 ```sql
 SELECT pg_reload_conf();
