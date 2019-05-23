@@ -507,8 +507,22 @@ SELECT * FROM "product";
 ````
 For more on SELECT, see the `SELECT` in the [PostgreSQL official docs](https://www.postgresql.org/docs/current/sql-select.html).
 
+## Maintenance and operations issues
 
-# Reference
+### Locate the pg_hba.conf file
+
+
+
+### Reload the configuration file while Postgres is running
+
+If you make changes to the Postgres configuration sometimes you need to restart.
+But you may just choose to reload the configuration file like this:
+
+```sql
+SELECT pg_reload_conf();
+```
+
+## Reference
 
 * PostgreSQL offical docs: [Server Administration](https://www.postgresql.org/docs/current/admin.html)
 * `psql` , a.k.a the [PostgreSQL interactive terminal](https://www.postgresql.org/docs/current/app-psql.html) 
