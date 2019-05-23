@@ -275,6 +275,16 @@ postgres=# \l
            |          |          |             |             | postgres=CTc/postgres
 ````
 
+### \l+ List databases with size, tablespace, and description
+
+To get additional information on the space consumed by database tables
+and comments describing those tables, use `\l+`:
+
+```txt
+postgres=# \l+
+```
+
+
 ### \c Connect to a database
 
 To see what's inside a database, connect to it using `\c` followed by the database name. 
