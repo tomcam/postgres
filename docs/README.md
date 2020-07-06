@@ -11,7 +11,7 @@ what database administration tasks, but aren't familiar with how to
 use `psql` to do the basics. 
 
 The [PostgreSQL documentation](https://www.postgresql.org/docs/manuals/) is incredibly 
-well written and through, but frankly, I didn't know where to start reading. This
+well written and thorough, but frankly, I didn't know where to start reading. This
 is my answer to that problem.
 
 If you have any complaints or suggestions please let me know by 
