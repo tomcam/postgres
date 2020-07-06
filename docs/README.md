@@ -28,7 +28,7 @@ It shows how to do the following at the `psql` prompt:
 * [SELECT, to do simple queries](#select)
 * [Reference](#reference) pointing to the official PostgreSQL documentation
 
-If you don't access to a live PostgreSQL installation we still have your back.
+If you don't have access to a live PostgreSQL installation at the moment we still have your back.
 You can follow through the examples and the output is shown as if you
 did type everything out.
 
