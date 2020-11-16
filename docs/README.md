@@ -291,6 +291,68 @@ and comments describing those tables, use `\l+`:
 postgres=# \l+
 ```
 
+### \x Expand/narrow table lists
+
+Use `\x` (X for eXpanded listing) to control 
+whether table listings use a wide or narrow format.
+
+| Command | Effect |
+--------------------
+| `\x off` | Show table listings in wide format   |
+| `\x on`  | Show table listings in narrow format |
+| `\x`     | Reverse the previous state           |
+| `\x auto`| Use terminal to determine format     |
+
+**Example:*** Here's an expanded listing:
+
+```txt
+postgres=# \l
+
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ foo       | tom      | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ foobarino | tom      | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ tom       | tom      | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(6 rows)
+
+```
+
+Here's an what happens when you want narrower listings
+
+```txt
+postgres=# \x on
+postgres=# \l
+
+
+-[ RECORD 1 ]-----+----------------------
+Name              | foo
+Owner             | tom
+Encoding          | UTF8
+Collate           | en_US.UTF-8
+Ctype             | en_US.UTF-8
+Access privileges | 
+-[ RECORD 2 ]-----+----------------------
+Name              | foobarino
+Owner             | tom
+Encoding          | UTF8
+Collate           | en_US.UTF-8
+Ctype             | en_US.UTF-8
+Access privileges | 
+-[ RECORD 3 ]-----+----------------------
+Name              | postgres
+Owner             | postgres
+Encoding          | UTF8
+Collate           | en_US.UTF-8
+Ctype             | en_US.UTF-8
+Access privileges | 
+
+```
 
 ### \c Connect to a database
 
