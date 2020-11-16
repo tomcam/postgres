@@ -291,19 +291,20 @@ and comments describing those tables, use `\l+`:
 postgres=# \l+
 ```
 
+
 ### \x Expand/narrow table lists
 
 Use `\x` (X for eXpanded listing) to control 
 whether table listings use a wide or narrow format.
 
-| Command | Effect |
---------------------
+| Command  | Effect                               |
+| ---------| -------------------------------------|
 | `\x off` | Show table listings in wide format   |
 | `\x on`  | Show table listings in narrow format |
 | `\x`     | Reverse the previous state           |
 | `\x auto`| Use terminal to determine format     |
 
-**Example:*** Here's an expanded listing:
+**Example:** Here's an expanded listing:
 
 ```txt
 postgres=# \l
