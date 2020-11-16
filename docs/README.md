@@ -53,7 +53,7 @@ as you'd use them in a typical work session.
 | [Quitting psql](#quitting-pqsql) |
 | [Opening a connection locally](#opening-a-connection-locally) |
 | [Opening a connection remotely](#opening-a-connection-remotely) |
-| [Looking at the psql prompt](#looking-at-the-psql-prompt) |
+| [Using the psql prompt](#looking-at-the-psql-prompt) |
 | **Getting information about databases** |
 | [\h Help](#h-help) |
 | [\l List databases](#l-list-databases) |
@@ -193,6 +193,10 @@ When you do, just remember to finish it off with that semicolon:
 [postgres=# DROP TABLE "sample_property_5"
 postgres=# ;
 ````
+
+### Scrolling through the command history
+
+* Use the up and down arrow keys to move backwards and forwards through the command history.
 
 ## Getting information about databases
 
