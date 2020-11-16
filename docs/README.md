@@ -10,6 +10,9 @@ I assume you're familiar with the command line and have a rough idea about
 what database administration tasks, but aren't familiar with how to
 use `psql` to do the basics. 
 
+View on [GitHub Pages](https://tomcam.github.io/postgres/) or directly on [GitHub](https://github.com/tomcam/postgres/)
+
+
 The [PostgreSQL documentation](https://www.postgresql.org/docs/manuals/) is incredibly 
 well written and thorough, but frankly, I didn't know where to start reading. This
 is my answer to that problem.
