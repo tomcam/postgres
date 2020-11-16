@@ -69,6 +69,7 @@ as you'd use them in a typical work session.
 | [Adding only specific fields from a record](#adding-only-specific-columns-fields-from-a-record) |
 | [Doing a simple query--get a list of records (SELECT)](#doing-a-simple-query--get-a-list-of-records-select) |
 | **Maintenance and operations** |
+| [Timing](#timing) |
 | [Maintenance](#maintenance) |
 
 
@@ -594,8 +595,38 @@ SELECT * FROM "product";
 For more on SELECT, see the `SELECT` in the [PostgreSQL official docs](https://www.postgresql.org/docs/current/sql-select.html).
 
 <a id="maintenance"></a>
+
 ## Maintenance and operations issues
 
+## Timing
+
+<a id="timing"><a/>
+### \t Timing SQL operations
+
+Use `\t` to show timing for all SQL operations performed.
+
+| Command       | Effect                               |
+| --------------| -------------------------------------|
+| `\timing off` | Disable timing of SQL operations     |
+| `\timing on`  | Show timing after all SQL operations |
+| `\timing`     | Toggle (reverse) the setting         |
+
+### Example of \t Timing command
+
+```
+tom=# insert into todo values ('Retry on Android before app submission,'8.x and earlier');
+INSERT 0 1
+tom=# \timing on
+Timing is on.
+tom=# insert into todo values ('Correct footer bug','Mobile version only');
+INSERT 0 1
+Time: 1.067 ms
+tom=# insert into todo values ('Retry on Android before app submission', '8.x and earlier');
+INSERT 0 1
+Time: 23.312 ms
+tom=# \timing
+Timing is off.
+```
 ### Locate the pg_hba.conf file
 
 Postgres configuration is stored in a file named `pg_hba.conf` *somewhere* in the file system, but
