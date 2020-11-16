@@ -307,6 +307,7 @@ whether table listings use a wide or narrow format.
 **Example:** Here's an expanded listing:
 
 ```txt
+/* List all databases. */
 postgres=# \l
 
                                   List of databases
@@ -324,9 +325,10 @@ postgres=# \l
 
 ```
 
-Here's an what happens when you want narrower listings
+Use `\x on` for narrower listings:
 
 ```txt
+/* Turn on narrow listings. */
 postgres=# \x on
 postgres=# \l
 
