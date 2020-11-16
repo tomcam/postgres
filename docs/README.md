@@ -70,6 +70,7 @@ as you'd use them in a typical work session.
 | [Doing a simple query--get a list of records (SELECT)](#doing-a-simple-query--get-a-list-of-records-select) |
 | **Maintenance and operations** |
 | [Timing](#timing) |
+| [Watch](#watch) |
 | [Maintenance](#maintenance) |
 
 
@@ -627,6 +628,51 @@ Time: 23.312 ms
 tom=# \timing
 Timing is off.
 ```
+
+## Watch
+
+The `\watch` command repeats the previous command at the specified interval.
+To use it, enter the SQL command you want repeated, then
+use `\watch` followed by the number of seconds you want for
+the interval between repeats, for rexample, `\watch 1`
+to repeat it every second.
+
+### Example of the \Watch command
+
+Here's an example of using `\watch` to see if any records have been
+inserted within the last 5 seconds.
+
+
+tom=# select count(*);
+  count 
+--------
+    726
+(726 rows)
+
+tom=# \watch 5
+Mon Nov 16 13:50:36 2020 (every 2s)
+
+  count 
+--------
+    726
+(726 rows)
+
+Mon Nov 16 13:50:38 2020 (every 2s)
+
+  count 
+--------
+    726
+(726 rows)
+
+Mon Nov 16 13:50:40 2020 (every 2s)
+
+  count 
+--------
+    726
+(726 rows)
+
+```
+
 ### Locate the pg_hba.conf file
 
 Postgres configuration is stored in a file named `pg_hba.conf` *somewhere* in the file system, but
