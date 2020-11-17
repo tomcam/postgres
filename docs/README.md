@@ -150,7 +150,7 @@ Here you'd enter the password. In case someone is peering over your shoulder, th
 
 ### Looking at the psql prompt
 A few things appear, then the `psql` prompt is displayed.
-The name of the current database appears before the prmopt.
+The name of the current database appears before the prompt.
 
 ````
 psql (11.1, server 11.0)
