@@ -50,7 +50,7 @@ as you'd use them in a typical work session.
 | Starting and quitting the psql interactive terminal | 
 | --- |
 | [Command-line prompts for psql](#using-psql) |
-| [Quitting psql](#quitting-pqsql) |
+| [Quitting psql](#quitting-psql) |
 | [Opening a connection locally](#opening-a-connection-locally) |
 | [Opening a connection remotely](#opening-a-connection-remotely) |
 | [Using the psql prompt](#looking-at-the-psql-prompt) |
@@ -111,7 +111,7 @@ $ psql -U sampleuser -h production-sfo-test1-do-user-4866002-0.db.ondigitalocean
 
 You'll use `psql` (aka the [PostgreSQL interactive terminal](https://www.postgresql.org/docs/current/app-psql.html)) most of all because it's used to create databases and tables, show information about tables, and even to enter information (records) into the database.
 
-### Quitting pqsql
+### Quitting psql
 
 Before we learn anything else, here's how to quit `psql` and return to the operating system prompt.
 You type backslash, the letter `q`, and then you press the Enter or return key.
