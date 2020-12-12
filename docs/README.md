@@ -234,7 +234,7 @@ You can get help on a particular item by listing it after the `\h` command.
 postgres=# \h drop table
 ````
 
-You'll get help on just tha item:
+You'll get help on just that item:
 
 ````txt
 Command:     DROP TABLE
