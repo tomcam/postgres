@@ -642,7 +642,7 @@ to repeat it every second.
 Here's an example of using `\watch` to see if any records have been
 inserted within the last 5 seconds.
 
-
+```
 tom=# select count(*);
   count 
 --------
